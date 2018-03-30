@@ -1,0 +1,11 @@
+{
+  "name": "services-amigo-oculto",
+  "version": "1.0.0",
+  "description": "CRUD e sorteio de amigos ocultos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cleiton Luiz Rocha Teodoro",
+  "license": "ISC"
+}
