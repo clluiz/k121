@@ -3,7 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const dest = path.resolve('../backend', 'public');
 
@@ -24,10 +23,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader',
-        }),
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -40,7 +36,7 @@ module.exports = {
           name: '[name].[ext]',
           outputPath: 'fonts/',
         },
-      }
+      },
     ],
   },
   plugins: [
@@ -51,9 +47,6 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].[contentHash].css',
-    }),
+    })
   ],
 };

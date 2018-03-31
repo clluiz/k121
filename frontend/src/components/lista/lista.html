@@ -1,0 +1,36 @@
+<h1>Sorteio de Amigo Oculto</h1>
+<hr/>
+
+<h2>Pessoas Cadastradas</h2>
+
+<button class="btn btn-info pull-right" ng-click="$ctrl.novo()">
+    <i class="glyphicon glyphicon-plus"></i>
+    Cadastrar Pessoa
+</button>
+
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th class="col-md-4 text-center">Nome</th>
+            <th class="col-md-3 text-center">E-mail</th>
+            <th class="col-md-3 text-center">Amigo</th>
+            <th class="col-md-2 text-center">Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="pessoa in $ctrl.pessoas">
+            <td class="text-center">{{pessoa.nome}}</td>
+            <td class="text-center">{{pessoa.email}}</td>
+            <td class="text-center">{{pessoa.amigo}}</td>
+            <td class="text-center">
+                <a class="btn btn-default" ng-click="$ctrl.remover($index)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+                <a class="btn btn-default" ng-click="$ctrl.alterar(pessoa)">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-block btn-warning">SORTEAR AMIGOS!</button>
