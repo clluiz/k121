@@ -1,23 +1,23 @@
 <section>
     <h1>Cadastro de Pessoa</h1>
     <hr/>
-    <form name="formulario" novalidate ng-submit="$ctrl.cadastrar()">
-        <div class="form-group" ng-class="{'has-error': $ctrl.formulario.$error}">
+    <form name="$ctrl.formulario" novalidate ng-submit="$ctrl.cadastrar()">
+        <div class="form-group" ng-class="{'has-error': $ctrl.formulario.$submitted && $ctrl.formulario.$error}">
             <label for="nome">Nome</label>
             <input type="text" required class="form-control" name="nome" ng-model="$ctrl.pessoa.nome"/>
-            <div ng-messages class="text-danger">
+            <div ng-messages class="text-danger" ng-show="$ctrl.formulario.nome.$error && $ctrl.formulario.$submitted">
                 <p ng-message="required">Campo obrigatório</p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': $ctrl.formulario.$submitted && $ctrl.formulario.$error}">
             <label for="email">E-mail</label>
-            <input type="email" required class="form-control" nome="email" ng-model="$ctrl.pessoa.email"/>
-            <div ng-messages>
+            <input type="email" required class="form-control" name="email" ng-model="$ctrl.pessoa.email"/>
+            <div ng-messages class="text-danger" ng-show="$ctrl.formulario.email.$error && $ctrl.formulario.$submitted">
                 <p ng-message="required">Campo obrigatório</p>
                 <p ng-message="email">E-mail inválido</p>
             </div>
         </div>
         <a ui-sref="/" class="btn btn-default" >Voltar</a>
-        <button class="btn btn-success pull-right">Salvar</button>
+        <button type="submit" class="btn btn-success pull-right">Salvar</button>
     </form>
 </section>
