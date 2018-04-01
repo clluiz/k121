@@ -7,8 +7,10 @@ class CadastroController {
         if (!this.formulario.$valid) {
             return;
         } 
-        this.$http.post('pessoas', this.pessoa)
-            .then(
+        const response = this.pessoa._id ? 
+            this.$http.put('pessoas', this.pessoa) : 
+            this.$http.post('pessoas', this.pessoa);
+        response.then(
                 response => this.$state.go('/'),
                 err => alert(err)
             );

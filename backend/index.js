@@ -38,4 +38,16 @@ app.delete('/pessoas/:idPessoa', (req, res) => {
     })
 });
 
+app.put('/pessoas', (req, res) => {
+    Pessoa.update(
+        { _id: req.body._id }, 
+        { $set: { nome: req.body.nome, email: req.body.nome }}, 
+        (err, pessoa) => {
+            if (err) {
+                return;
+            }
+            res.send(pessoa);
+        });
+});
+
 app.listen(3001, () => console.log('Example app listening on port 3001!'));
