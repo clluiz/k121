@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const pessoaSchema = new Schema({
+const PessoaSchema = new Schema({
     nome: String,
     email: String,
-    amigo: Schema.ObjectId
+    amigo: String
 })
 
-const Pessoa = mongoose.model('Pessoa', pessoaSchema);
+const Pessoa = mongoose.model('Pessoa', PessoaSchema);
 
-module.exports = Pessoa;
+module.exports =  Pessoa;
+    

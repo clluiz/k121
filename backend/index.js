@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const app = express()
 const Pessoa = require('./Pessoa');
 const parser = require('body-parser');
+const shuffle = require('shuffle-array');
 
 mongoose.connect('mongodb://k121:k121@ds237855.mlab.com:37855/k121',{}, err => console.log(err));
 
-//app.use(parser.urlencoded({extended: true}));
 app.use(parser.json());
 app.get('/pessoas/:idPessoa', (req, res) => {
     Pessoa.findById(req.params.idPessoa, (err, pessoa) => {
@@ -15,9 +15,10 @@ app.get('/pessoas/:idPessoa', (req, res) => {
 });
 
 app.get('/pessoas', (req, res) => {
-    Pessoa.find({}, (err, pessoas) => {
-        res.send(pessoas);        
-    });
+    Pessoa.find({})
+        .exec((err, pessoas) => {
+            res.send(pessoas);
+        });
 });
 
 app.post('/pessoas', (req, res) => {
@@ -48,6 +49,22 @@ app.put('/pessoas', (req, res) => {
             }
             res.send(pessoa);
         });
+});
+
+app.post('/sortear', (req, res) => {
+    Pessoa.find({}, (err, pessoas) => {
+        const shuffled = shuffle(pessoas);
+        var bulk = Pessoa.collection.initializeUnorderedBulkOp();
+        shuffled.forEach((pessoa, index) => {
+            if (index < shuffled.length - 2) {
+                bulk.find({_id: pessoa._id}).update({$set: {amigo: pessoas[index + 1].nome}});
+            } else {
+                bulk.find({_id: pessoa._id}).update({$set: {amigo: pessoas[0].nome}});
+            }
+        });
+        bulk.execute();
+        res.send('Sorteado');
+    });
 });
 
 app.listen(3001, () => console.log('Example app listening on port 3001!'));

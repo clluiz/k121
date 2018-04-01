@@ -30,6 +30,9 @@ class ListagemController {
                 err => alert(err)
             );
     }
+    sortear() {
+        this.$http.post('sortear', {});
+    }
 }
 
 export default {
