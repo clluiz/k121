@@ -4,6 +4,7 @@ const app = express()
 const Pessoa = require('./Pessoa');
 const parser = require('body-parser');
 const shuffle = require('shuffle-array');
+const enviarEmail = require('./email');
 
 mongoose.connect('mongodb://k121:k121@ds237855.mlab.com:37855/k121',{}, err => console.log(err));
 
@@ -57,13 +58,16 @@ app.post('/sortear', (req, res) => {
         var bulk = Pessoa.collection.initializeUnorderedBulkOp();
         shuffled.forEach((pessoa, index) => {
             if (index < shuffled.length - 1) {
+                pessoa.amigo = pessoas[index + 1].nome;
                 bulk.find({_id: pessoa._id}).update({$set: {amigo: pessoas[index + 1].nome}});
             } else {
+                pessoa.amigo = pessoas[0].nome;
                 bulk.find({_id: pessoa._id}).update({$set: {amigo: pessoas[0].nome}});
             }
+            enviarEmail(pessoa.email, pessoa.amigo)
         });
         bulk.execute();
-        res.send('Sorteado');
+        res.send('O sorteio foi realizado. Em breve os participantes irão receber um e-mail com seu amigo.');
     });
 });
 

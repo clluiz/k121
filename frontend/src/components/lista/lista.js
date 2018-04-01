@@ -34,7 +34,7 @@ class ListagemController {
         this.$http.post('sortear', {})
             .then(
                 response => {
-                    alert('O sorteio foi realizado. Em breve os participantes irão receber um e-mail com seu amigo.');
+                    alert(response.data);
                     this.listar();
                 }, err => alert(err) 
             );
