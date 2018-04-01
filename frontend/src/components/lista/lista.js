@@ -14,6 +14,10 @@ class ListagemController {
     novo() {
         this.$state.go('cadastro');
     }
+    alterar(pessoa) {
+        console.log(pessoa);
+        this.$state.go('alterar', { id: pessoa._id });
+    }
 }
 
 export default {
