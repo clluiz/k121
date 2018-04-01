@@ -43,7 +43,7 @@ app.delete('/pessoas/:idPessoa', (req, res) => {
 app.put('/pessoas', (req, res) => {
     Pessoa.update(
         { _id: req.body._id }, 
-        { $set: { nome: req.body.nome, email: req.body.nome }}, 
+        { $set: { nome: req.body.nome, email: req.body.email }}, 
         (err, pessoa) => {
             if (err) {
                 return;

@@ -11,7 +11,10 @@ class CadastroController {
             this.$http.put('pessoas', this.pessoa) : 
             this.$http.post('pessoas', this.pessoa);
         response.then(
-                response => this.$state.go('/'),
+                response => { 
+                    alert('Dados inseridos com sucesso.');
+                    this.$state.go('/'); 
+                },
                 err => alert(err)
             );
     }
