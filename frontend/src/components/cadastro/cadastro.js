@@ -7,6 +7,11 @@ class CadastroController {
         if (!this.formulario.$valid) {
             return;
         } 
+        this.$http.post('pessoas', this.pessoa)
+            .then(
+                response => this.$state.go('/'),
+                err => alert(err)
+            );
     }
 }
 

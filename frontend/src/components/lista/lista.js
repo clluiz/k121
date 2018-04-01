@@ -5,6 +5,9 @@ class ListagemController {
         this.pessoas = [];
     }
     $onInit() {
+        this.listar();
+    }
+    listar() {
         this.$http.get('pessoas')
             .then(
                 response => this.pessoas = response.data,
@@ -15,8 +18,17 @@ class ListagemController {
         this.$state.go('cadastro');
     }
     alterar(pessoa) {
-        console.log(pessoa);
         this.$state.go('alterar', { id: pessoa._id });
+    }
+    remover(pessoa) {
+        this.$http.delete(`/pessoas/${pessoa._id}`)
+            .then(
+                (response) => {
+                    alert(response.data);
+                    this.listar();
+                },
+                err => alert(err)
+            );
     }
 }
 
