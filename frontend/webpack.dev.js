@@ -2,6 +2,7 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
+const proxy = require('http-proxy-middleware');
 
 module.exports = merge(common, {
   devtool: 'inline-source-map',
@@ -9,6 +10,9 @@ module.exports = merge(common, {
     contentBase: common.dest,
     port: 3000,
     hot: true,
+    proxy: {
+      '/': 'http://localhost:3001',
+    },
   },
   module: {
     rules: [
