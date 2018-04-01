@@ -1,10 +1,12 @@
 class CadastroController {
-    constructor($state) {
+    constructor($state, $http) {
         this.$state = $state;
-        this.pessoa = {};
+        this.$http = $http;
     }
     cadastrar() {
-        console.log(this.pessoa)
+        if (!this.formulario.$valid) {
+            return;
+        } 
     }
 }
 
@@ -12,4 +14,7 @@ export default {
     template: require('./cadastro.html'),
     controllerAs: '$ctrl',
     controller: CadastroController,
+    bindings: {
+        pessoa: '<',
+    }
 }
