@@ -56,7 +56,7 @@ app.post('/sortear', (req, res) => {
         const shuffled = shuffle(pessoas);
         var bulk = Pessoa.collection.initializeUnorderedBulkOp();
         shuffled.forEach((pessoa, index) => {
-            if (index < shuffled.length - 2) {
+            if (index < shuffled.length - 1) {
                 bulk.find({_id: pessoa._id}).update({$set: {amigo: pessoas[index + 1].nome}});
             } else {
                 bulk.find({_id: pessoa._id}).update({$set: {amigo: pessoas[0].nome}});
