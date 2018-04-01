@@ -1,30 +1,16 @@
 class ListagemController {
-    constructor($state) {
+    constructor($state, $http) {
         this.$state = $state;
-        this.pessoas = [
-            {
-                nome: '1',
-                email: '1@gmail.com'
-            },
-            {
-                nome: '1',
-                email: '1@gmail.com'
-            },
-            {
-                nome: '1',
-                email: '1@gmail.com'
-            },
-            {
-                nome: '1',
-                email: '1@gmail.com'
-            },
-            {
-                nome: '1',
-                email: '1@gmail.com'
-            }
-        ]
+        this.$http = $http;
+        this.pessoas = [];
     }
-
+    $onInit() {
+        this.$http.get('pessoas')
+            .then(
+                response => this.pessoas = response.data,
+                err => alert(err)
+            );
+    }
     novo() {
         this.$state.go('cadastro');
     }
