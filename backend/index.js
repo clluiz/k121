@@ -9,6 +9,7 @@ const enviarEmail = require('./email');
 mongoose.connect('mongodb://k121:k121@ds237855.mlab.com:37855/k121',{}, err => console.log(err));
 
 app.use(parser.json());
+app.use(express.static('public'))
 app.get('/pessoas/:idPessoa', (req, res) => {
     Pessoa.findById(req.params.idPessoa, (err, pessoa) => {
         res.send(pessoa);
@@ -64,6 +65,7 @@ app.post('/sortear', (req, res) => {
                 pessoa.amigo = pessoas[0].nome;
                 bulk.find({_id: pessoa._id}).update({$set: {amigo: pessoas[0].nome}});
             }
+            console.log(pessoa.email);
             enviarEmail(pessoa.email, pessoa.amigo)
         });
         bulk.execute();

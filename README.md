@@ -18,4 +18,6 @@ Após fazer o checkout do projeto, duas pasta serão criadas:
 - Ao fim da instalação das dependencias digite npm start. Os serviços estarão em execução em localhost:3001;
 
 
+## Observação sobre o envio de e-mails
 
+- Por ter usado o mailgun na versão gratuita o apenas email que forneceram AUTORIZAÇÂO irão ver que é seu amigo oculto, caso precisem testar devem me avisar para que eu autorize o email.
